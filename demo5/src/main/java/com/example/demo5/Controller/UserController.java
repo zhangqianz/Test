@@ -55,7 +55,7 @@ public class UserController {
     public void equal(User user) throws Exception {
       User user1= userService.equal(user);
       if (user1==null){
-          System.out.println("该用户不存在。。。。。。。。。。。");
+          System.out.println("该用户不存在或者密码输入错误。。。。。。。。。。。");
       }else if (user.getUsername().equals(user1.getUsername())&user.getPassword().equals(user1.getPassword())){
           System.out.println("登陆成功。。。。。。");
           String jwt=JwtUtil.createJWT(Constant.JWT_ID,JwtUtil.generalSubject(user1),Constant.JWT_TTL);
