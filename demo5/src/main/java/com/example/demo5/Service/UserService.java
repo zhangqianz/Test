@@ -39,4 +39,9 @@ public class UserService {
         userMapper.updateByPrimaryKey(user);
     }
 
+    @Transactional
+    public User equal(User user){
+      return userMapper.selectOne(user);
+    }
+
 }

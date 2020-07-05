@@ -1,7 +1,10 @@
 package com.example.demo5.Controller;
 
+
 import com.example.demo5.Service.UserService;
+import com.example.demo5.conStant.Constant;
 import com.example.demo5.pojo.User;
+import com.example.demo5.untils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,4 +50,16 @@ public class UserController {
         userService.update(user);
     }
 
+    @GetMapping("/login")
+    @ResponseBody
+    public void equal(User user) throws Exception {
+      User user1= userService.equal(user);
+      if (user1==null){
+          System.out.println("该用户不存在。。。。。。。。。。。");
+      }else if (user.getUsername().equals(user1.getUsername())&user.getPassword().equals(user1.getPassword())){
+          System.out.println("登陆成功。。。。。。");
+          String jwt=JwtUtil.createJWT(Constant.JWT_ID,JwtUtil.generalSubject(user1),Constant.JWT_TTL);
+          System.out.println(jwt);
+      }
+    }
 }
